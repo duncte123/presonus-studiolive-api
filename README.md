@@ -8,6 +8,7 @@ Tested against the following models
 * StudioLive 16 Mixer
 * StudioLive 16R Rack Mixer
 * StudioLive 24R Rack Mixer
+* StudioLive 32SC
 
 ---
 
