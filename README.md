@@ -14,7 +14,7 @@ Tested against the following models
 
 # Install
 
-`npm install featherbear/presonus-studiolive-api#v1.4.2`
+`npm install @duncte123/presonus-studiolive-api`
 
 # Usage
 
