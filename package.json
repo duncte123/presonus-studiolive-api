@@ -1,6 +1,6 @@
 {
   "name": "@duncte123/presonus-studiolive-api",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "Unofficial PreSonus StudioLive III Network Control API",
   "main": "dist/api.js",
   "scripts": {
