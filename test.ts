@@ -4,8 +4,8 @@ import { SCENES_OF } from './src/lib/util/fileRequestUtil'
 import { createPacket } from './src/lib/util/messageProtocol'
 
 const client = new Client({
-  host: '192.168.0.29',
-  port: 53000
+  host: '192.168.1.119',
+  port: 53000,
 }, {
   autoreconnect: true,
   logLevel: process.env.DEBUG ? 'debug' : 'info'
@@ -31,11 +31,11 @@ client.on('data', function ({ code, data }) {
   // 
 })
 
-client.on(MessageCode.ParamValue, function (data: SettingType) {
-  //
+client.on(MessageCode.ParamString, function (data: SettingType) {
+  console.log(data);
 })
 
-client.connect().then(() => {
+client.connect().then(async () => {
   console.log('Connection was established')
 
   // client.hehe().then(j => console.log(j))
@@ -50,4 +50,25 @@ client.connect().then(() => {
   //     console.log('Got scene list', j)
   //   })
   // })
+
+  const name = client.getUsername({
+    channel: 17,
+    type: 'LINE'
+  });
+
+  console.log(name);
+
+  await client.setUsername({
+    channel: 17,
+    type: 'LINE'
+  }, 'PC main')
+
+  const name2 = client.getUsername({
+    channel: 17,
+    type: 'LINE'
+  });
+
+  console.log(name2);
+
+  console.log();
 })

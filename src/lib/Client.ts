@@ -320,6 +320,8 @@ export class Client {
       console.warn('Unhandled message code', messageCode)
     }
 
+    // console.log(data);
+
     if (!data) return
     this.emit(messageCode, data)
     this.emit('data', { code: messageCode, data })
@@ -597,6 +599,28 @@ export class Client {
     let targetString = parseChannelString(selector)
     targetString += '/solo'
     return targetString
+  }
+
+  getUsername(selector: ChannelSelector) {
+    const state = this.state.get(this._getUsernameTargetString(selector))
+    if (state === null) return null
+    return state
+  }
+
+  async setUsername(selector: ChannelSelector, newName: string) {
+    const targetString = this._getUsernameTargetString(selector);
+
+    await this._sendPacket(
+      MessageCode.ParamString,
+      Buffer.concat([
+        Buffer.from(targetString + '\x00\x00\x00'),
+        Buffer.from(newName + '\x00')
+      ])
+    );
+  }
+
+  private _getUsernameTargetString(selector: ChannelSelector) {
+    return parseChannelString(selector) + '/username';
   }
 
   setColor(selector: ChannelSelector, hex: string, alpha: number = 0xFF) {
